@@ -10,7 +10,9 @@ import 'package:flutter_weather_app/widgets/temp_view.dart';
 // C:\Users\Bogdan\AppData\Local\Android\Sdk\tools\emulator.exe -avd Pixel_8 -dns-server 8.8.8.8
 
 class WeatherForecastScreen extends StatefulWidget {
-  const WeatherForecastScreen({super.key});
+  final locationWeather;
+
+  WeatherForecastScreen({this.locationWeather});
 
   @override
   State<WeatherForecastScreen> createState() => _WeatherForecastScreenState();
@@ -19,15 +21,16 @@ class WeatherForecastScreen extends StatefulWidget {
 class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
   late Future<WeatherForecast> forecastObject;
 
-  String _cityName = 'London';
+  // String _cityName = 'London';
 
-  // String _cityName;
+  late String _cityName;
 
   @override
   void initState() {
     super.initState();
-    forecastObject =
-        WeatherApi().fetchWeatherForecastWithCity(cityName: _cityName);
+    if (widget.locationWeather != null) {
+      forecastObject = WeatherApi().fetchWeatherForecast();
+    }
 
     // forecastObject.then((weather) {
     //   print(weather.list![0].weather?[0].main);
@@ -43,7 +46,11 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
         centerTitle: true,
         foregroundColor: Colors.white,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            setState(() {
+              forecastObject = WeatherApi().fetchWeatherForecast();
+            });
+          },
           icon: const Icon(Icons.my_location),
         ),
         actions: [
@@ -59,7 +66,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                 setState(() {
                   _cityName = tappedName;
                   forecastObject = WeatherApi()
-                      .fetchWeatherForecastWithCity(cityName: _cityName);
+                      .fetchWeatherForecast(cityName: _cityName, isCity: true);
                 });
               }
             },
