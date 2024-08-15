@@ -10,9 +10,10 @@ class CityView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var forecastList = snapshot.data?.list;
-    var formattedDate = Util.getFormattedDate(
-        DateTime.fromMicrosecondsSinceEpoch(forecastList?[0].dt ??
-            DateTime.now().microsecondsSinceEpoch * 1000));
+    var milliseconds =
+        (forecastList?[0].dt ?? DateTime.now().millisecondsSinceEpoch) * 1000;
+    var date = DateTime.fromMillisecondsSinceEpoch(milliseconds);
+    var formattedDate = Util.getFormattedDate(date);
     var city = snapshot.data?.city?.name;
     var country = snapshot.data?.city?.country;
 

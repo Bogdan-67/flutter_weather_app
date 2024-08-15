@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather_app/api/weather_api.dart';
 import 'package:flutter_weather_app/models/weather_forecast_daily.dart';
+import 'package:flutter_weather_app/widgets/bottom_list_view.dart';
 import 'package:flutter_weather_app/widgets/city_view.dart';
 import 'package:flutter_weather_app/widgets/detail_view.dart';
 import 'package:flutter_weather_app/widgets/temp_view.dart';
@@ -36,6 +37,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
         title: Text('Weather'),
         backgroundColor: Colors.blue,
         centerTitle: true,
+        foregroundColor: Colors.white,
         leading: IconButton(
           onPressed: () {},
           icon: Icon(Icons.my_location),
@@ -66,6 +68,10 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                           height: 20,
                         ),
                         DetailView(snapshot: snapshot),
+                        SizedBox(
+                          height: 40,
+                        ),
+                        BottomListView(snapshot: snapshot),
                       ],
                     );
                   } else {

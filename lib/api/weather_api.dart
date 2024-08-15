@@ -10,7 +10,8 @@ class WeatherApi {
     var queryParams = {
       'q': cityName,
       'units': 'metric',
-      'APPID': Constants.WEATHER_APP_ID
+      'cnt': '7',
+      'appid': Constants.WEATHER_APP_ID
     };
 
     var uri = Uri.https(Constants.WEATHER_BASE_URL_DOMAIN,
